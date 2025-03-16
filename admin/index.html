@@ -11,8 +11,13 @@
     <script>
         netlifyIdentity.on('init', user => {
             if (!user) {
-                netlifyIdentity.open('signup'); // 수동으로 회원가입/초대 화면 열기
+                netlifyIdentity.open('login'); // 로그인 창 강제 열기
+            } else {
+                console.log('Logged in as:', user.email);
             }
+        });
+        netlifyIdentity.on('login', user => {
+            console.log('Login successful:', user);
         });
     </script>
 </body>
