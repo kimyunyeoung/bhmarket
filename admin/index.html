@@ -9,15 +9,25 @@
 <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
+        // Netlify Identity 이벤트 핸들러
         netlifyIdentity.on('init', user => {
             if (!user) {
-                netlifyIdentity.open('login'); // 로그인 창 강제 열기
+                netlifyIdentity.open('signup'); // 초기화 시 가입 창 열기
             } else {
                 console.log('Logged in as:', user.email);
             }
         });
+        netlifyIdentity.on('signup', user => {
+            console.log('Signup successful:', user);
+            netlifyIdentity.close(); // 가입 후 위젯 닫기
+        });
         netlifyIdentity.on('login', user => {
             console.log('Login successful:', user);
+            window.location.href = '/admin/'; // 로그인 후 admin으로 리디렉션
+        });
+        netlifyIdentity.on('confirm', user => {
+            console.log('Email confirmed:', user);
+            window.location.href = '/admin/'; // 이메일 확인 후 admin으로 리디렉션
         });
     </script>
 </body>
