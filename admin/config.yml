@@ -6,14 +6,15 @@ public_folder: "/images/uploads" # 공개 URL 경로
 collections:
   - name: "products"
     label: "Products"
-    folder: "static/data" # 데이터 저장 경로
-    format: "json" # JSON 형식으로 저장
+    folder: "static/data"
+    format: "json"
     create: true
-    slug: "products" # 파일명: products.json
+    slug: "products"
     fields:
       - {label: "Products", name: "products", widget: "list", fields: [
           {label: "Name", name: "name", widget: "string"},
           {label: "Price", name: "price", widget: "number"},
           {label: "Image", name: "image", widget: "image"},
-          {label: "Detail Images", name: "detailImages", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
+          {label: "Detail Images", name: "detailImages", widget: "list", field: {label: "Image", name: "image", widget: "image"}},
+          {label: "Title", name: "title", widget: "string"}  # 추가
         ]}
