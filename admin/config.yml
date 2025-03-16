@@ -1,20 +1,29 @@
-backend:
-  name: git-gateway
-  branch: main # 배포 브랜치 (보통 main 또는 master)
-media_folder: "static/images/uploads" # 이미지 업로드 경로
-public_folder: "/images/uploads" # 공개 URL 경로
-collections:
-  - name: "products"
-    label: "Products"
-    folder: "static/data"
-    format: "json"
-    create: true
-    slug: "products"
-    fields:
-      - {label: "Products", name: "products", widget: "list", fields: [
-          {label: "Name", name: "name", widget: "string"},
-          {label: "Price", name: "price", widget: "number"},
-          {label: "Image", name: "image", widget: "image"},
-          {label: "Detail Images", name: "detailImages", widget: "list", field: {label: "Image", name: "image", widget: "image"}},
-          {label: "Title", name: "title", widget: "string"}  # 추가
-        ]}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify CMS</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+        netlifyIdentity.on('init', user => {
+            if (!user) {
+                netlifyIdentity.open('signup'); // 가입 화면 강제 열기
+            } else {
+                console.log('Logged in as:', user.email);
+            }
+        });
+        netlifyIdentity.on('signup', user => {
+            console.log('Signup successful:', user);
+            netlifyIdentity.close(); // 가입 후 위젯 닫기
+        });
+        netlifyIdentity.on('login', user => {
+            console.log('Login successful:', user);
+            window.location.href = '/admin/'; // 로그인 후 admin으로 리디렉션
+        });
+    </script>
+</body>
+</html>
