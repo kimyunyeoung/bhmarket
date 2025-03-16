@@ -4,8 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netlify CMS</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+        netlifyIdentity.on('init', user => {
+            if (!user) {
+                netlifyIdentity.open('signup'); // 수동으로 회원가입/초대 화면 열기
+            }
+        });
+    </script>
 </body>
 </html>
