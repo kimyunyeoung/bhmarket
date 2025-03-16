@@ -1,0 +1,12 @@
+{
+  "products": [
+    {
+      "name": "테스트 상품",
+      "price": 10000,
+      "image": "/images/uploads/test.jpg",
+      "detailImages": [
+        {"image": "/images/uploads/detail1.jpg"}
+      ]
+    }
+  ]
+}
