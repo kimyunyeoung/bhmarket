@@ -1,0 +1,19 @@
+backend:
+  name: git-gateway
+  branch: main # 배포 브랜치 (보통 main 또는 master)
+media_folder: "static/images/uploads" # 이미지 업로드 경로
+public_folder: "/images/uploads" # 공개 URL 경로
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "static/data" # 데이터 저장 경로
+    format: "json" # JSON 형식으로 저장
+    create: true
+    slug: "products" # 파일명: products.json
+    fields:
+      - {label: "Products", name: "products", widget: "list", fields: [
+          {label: "Name", name: "name", widget: "string"},
+          {label: "Price", name: "price", widget: "number"},
+          {label: "Image", name: "image", widget: "image"},
+          {label: "Detail Images", name: "detailImages", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
+        ]}
