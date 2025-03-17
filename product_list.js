@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 영업 종료 시 메시지 표시
     if (!isBusinessOpen()) {
         productList.innerHTML = `
-            <li style="text-align: center; padding: 20px;">
+            <li class="closed">
                 <strong>영업이 종료되었습니다.</strong><br>
                 <p>영업시간 안내:</p>
                 <p>평일: 11:00 ~ 20:00</p>
