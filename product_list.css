@@ -1,58 +1,71 @@
 /* product_list.css */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* 더 세련된 폰트 */
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f4f7fa; /* 밝고 부드러운 배경 */
+    color: #333; /* 텍스트 색상 강화 */
 }
 
 h1 {
     text-align: center;
-    margin: 20px 0;
+    margin: 30px 0;
+    font-size: 2.5rem; /* 더 큰 제목 */
+    color: #2c3e50; /* 고급스러운 색상 */
+    font-weight: 700;
 }
 
 ul {
     list-style-type: none;
-    padding: 0;
-    margin: 10px;
+    padding: 0 20px; /* 좌우 여백 증가 */
+    max-width: 1200px; /* 콘텐츠 최대 너비 제한 */
+    margin: 0 auto; /* 가운데 정렬 */
 }
 
 li {
-    background: white;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    margin: 15px 0;
+    padding: 20px;
+    border-radius: 12px; /* 둥근 모서리 */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* 부드러운 그림자 */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.3rem; /* 기본 크기 증가 */
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+}
+
+li:hover {
+    transform: translateY(-5px); /* 호버 시 올라감 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12); /* 그림자 강화 */
 }
 
 img {
-    border-radius: 5px;
-    width: 100px;
+    border-radius: 8px;
+    width: 120px; /* 이미지 크기 증가 */
     height: auto;
-    transition: transform 0.2s;
+    object-fit: cover; /* 이미지 비율 유지 */
+    transition: transform 0.3s ease;
 }
 
 img:hover {
-    transform: scale(1.05);
+    transform: scale(1.1); /* 호버 시 확대 */
 }
 
 /* 모바일 반응형 */
 @media (max-width: 600px) {
+    h1 {
+        font-size: 2rem; /* 모바일에서 제목 크기 조정 */
+    }
     li {
-        flex-direction: column; /* 세로로 쌓이게 */
+        flex-direction: column;
         align-items: flex-start;
-        padding: 10px;
+        padding: 15px;
+        font-size: 1.6rem; /* 모바일 텍스트 크기 더 키움 */
     }
     img {
-        width: 100%; /* 모바일에서 이미지 크기 조정 */
-        max-width: 150px; /* 최대 크기 제한 */
-        margin-bottom: 10px;
-    }
-    button {
-        width: 100%; /* 버튼 폭 조정 */
-        margin-top: 10px;
+        width: 100%;
+        max-width: 250px; /* 모바일 이미지 크기 조정 */
+        margin-bottom: 15px;
     }
 }
