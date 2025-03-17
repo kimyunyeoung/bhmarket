@@ -8,7 +8,7 @@ public_folder: "/images/uploads"
 collections:
   - name: "products"
     label: "Products"
-    files:  # 'file' 대신 'files' 배열 사용
+    files:
       - file: "static/data/products.json"  # 단일 파일 경로 명시
         label: "Product List"
         name: "products"
@@ -28,3 +28,10 @@ collections:
                 fields:
                   - { label: "Image", name: "image", widget: "image" }
                   - { label: "Description", name: "description", widget: "string", required: false }
+          # 새로운 Detail Images 필드 추가 (이름 충돌 방지를 위해 'extraDetailImages'로 명명)
+          - label: "Extra Detail Images"  # 구분을 위해 레이블 변경
+            name: "extraDetailImages"    # 기존 'detailImages'와 다른 이름 사용
+            widget: "list"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Description", name: "description", widget: "string", required: false }
