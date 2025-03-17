@@ -3,31 +3,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netlify CMS</title>
+    <title>상품 관리자 페이지 - Netlify CMS</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+    <div id="loading">관리자 페이지를 로드 중입니다...</div>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-        // Netlify Identity 이벤트 핸들러
+        // Netlify Identity 초기화
         netlifyIdentity.on('init', user => {
             if (!user) {
-                netlifyIdentity.open('signup'); // 초기화 시 가입 창 열기
+                netlifyIdentity.open('login'); // 로그인 화면 우선 표시
+                console.log('사용자가 로그인하지 않았습니다.');
             } else {
-                console.log('Logged in as:', user.email);
+                console.log('로그인된 사용자:', user);
             }
         });
-        netlifyIdentity.on('signup', user => {
-            console.log('Signup successful:', user);
-            netlifyIdentity.close(); // 가입 후 위젯 닫기
-        });
-        netlifyIdentity.on('login', user => {
-            console.log('Login successful:', user);
-            window.location.href = '/admin/'; // 로그인 후 admin으로 리디렉션
-        });
-        netlifyIdentity.on('confirm', user => {
-            console.log('Email confirmed:', user);
-            window.location.href = '/admin/'; // 이메일 확인 후 admin으로 리디렉션
+
+        // CMS 로드 실패 시 처리
+        window.CMS_MANUAL_INIT = true; // 수동 초기화 설정
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                CMS.init();
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('CMS 초기화 실패:', error);
+                document.getElementById('loading').innerText = 'CMS 로드에 실패했습니다.';
+            }
         });
     </script>
 </body>
