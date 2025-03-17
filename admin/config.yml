@@ -8,13 +8,14 @@ public_folder: "/images/uploads"
 collections:
   - name: "products"
     label: "Products"
-    # 단일 파일로 저장하도록 설정
-    file: "static/data/products.json"  # 'folder' 대신 'file' 사용
+    file: "static/data/products.json"  # 단일 파일로 명시
     format: "json"
+    # 'create'와 'slug'는 단일 파일에서는 필요 없으므로 제거
     fields:
       - label: "Products"
         name: "products"
         widget: "list"
+        summary: "{{fields.name}} - {{fields.price}}원"  # 관리자 UI에서 보기 쉽게
         fields:
           - { label: "Name", name: "name", widget: "string" }
           - { label: "Price", name: "price", widget: "number" }
