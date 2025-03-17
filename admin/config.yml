@@ -1,29 +1,27 @@
 backend:
   name: git-gateway
-  branch: main # 기본 배포 브랜치
+  branch: main
 
-# 미디어 파일 설정
-media_folder: "static/images/uploads" # CMS에서 업로드된 이미지 저장 경로
-public_folder: "/images/uploads" # 웹에서 접근 가능한 공개 경로
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "products"
     label: "Products"
-    folder: "static/data" # 상품 데이터가 저장될 디렉토리
-    format: "json" # 단일 JSON 파일로 저장
-    create: true # 새 항목 생성 허용
-    identifier_field: "name" # 상품 식별자로 사용할 필드
+    # 단일 파일로 저장하도록 설정
+    file: "static/data/products.json"  # 'folder' 대신 'file' 사용
+    format: "json"
     fields:
       - label: "Products"
         name: "products"
         widget: "list"
         fields:
-          - { label: "Name", name: "name", widget: "string" } # 상품 이름
-          - { label: "Price", name: "price", widget: "number" } # 상품 가격 (숫자)
-          - { label: "Image", name: "image", widget: "image" } # 썸네일 이미지
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Price", name: "price", widget: "number" }
+          - { label: "Image", name: "image", widget: "image" }
           - label: "Detail Images"
             name: "detailImages"
             widget: "list"
             fields:
-              - { label: "Image", name: "image", widget: "image" } # 상세 이미지
-              - { label: "Description", name: "description", widget: "string", required: false } # 이미지 설명 (선택 사항)
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Description", name: "description", widget: "string", required: false }
