@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "name": "부사사과",
+      "price": 15000,
+      "image": "/images/uploads/스크린샷-2024-12-24-114934.png",
+      "detailImages": [
+        {
+          "image": "/images/uploads/스크린샷 2024-12-19 171944.png"
+        }
+      ]
+    }
+  ]
+}
