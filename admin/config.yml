@@ -8,21 +8,23 @@ public_folder: "/images/uploads"
 collections:
   - name: "products"
     label: "Products"
-    file: "static/data/products.json"  # 단일 파일로 명시
-    format: "json"
-    # 'create'와 'slug'는 단일 파일에서는 필요 없으므로 제거
-    fields:
-      - label: "Products"
+    files:  # 'file' 대신 'files' 배열 사용
+      - file: "static/data/products.json"  # 단일 파일 경로 명시
+        label: "Product List"
         name: "products"
-        widget: "list"
-        summary: "{{fields.name}} - {{fields.price}}원"  # 관리자 UI에서 보기 쉽게
+        format: "json"
         fields:
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Price", name: "price", widget: "number" }
-          - { label: "Image", name: "image", widget: "image" }
-          - label: "Detail Images"
-            name: "detailImages"
+          - label: "Products"
+            name: "products"
             widget: "list"
+            summary: "{{fields.name}} - {{fields.price}}원"
             fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Price", name: "price", widget: "number" }
               - { label: "Image", name: "image", widget: "image" }
-              - { label: "Description", name: "description", widget: "string", required: false }
+              - label: "Detail Images"
+                name: "detailImages"
+                widget: "list"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+                  - { label: "Description", name: "description", widget: "string", required: false }
