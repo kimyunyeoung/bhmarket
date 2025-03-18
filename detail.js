@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 formMessage.style.opacity = '0';
                 setTimeout(() => {
-                    window.location.href = 'index.html'; // 5초 후 상품 목록 페이지로 이동
+                    window.location.href = 'index.html';
                 }, 300); // 페이드아웃 후 이동
             }, 5000); // 5초 후 메시지 사라짐
         })
@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formMessage.textContent = `예약에 실패했습니다: ${error.message}`;
             formMessage.classList.remove('hidden');
             formMessage.classList.add('error');
+            setTimeout(() => formMessage.classList.add('hidden'), 3000); // 실패 메시지도 3초 후 사라짐
         })
         .finally(() => {
             reserveButton.disabled = false;
