@@ -170,7 +170,7 @@ img:hover {
     border-radius: 10px;
     margin: 10px 0;
     display: block;
-    transition: none !important; /* 이미지 호버 시 확대 방지 */
+    transition: none !important;
 }
 
 .form-group {
@@ -187,7 +187,8 @@ img:hover {
     letter-spacing: 0.5px;
 }
 
-.form-group input {
+.form-group input,
+.form-group select {
     width: 100%;
     max-width: 400px;
     padding: 14px;
@@ -200,9 +201,16 @@ img:hover {
     transition: box-shadow 0.3s;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
     box-shadow: 0 0 8px rgba(108, 92, 231, 0.5);
     outline: none;
+}
+
+.form-group select {
+    appearance: none; /* 기본 화살표 제거 */
+    background: linear-gradient(135deg, #f5f7fa, #e4e7eb) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%236c5ce7" d="M0 3h10L5 8z"/></svg>') no-repeat right 15px center;
+    background-size: 10px;
 }
 
 #reserveButton {
@@ -240,7 +248,7 @@ img:hover {
     text-align: center;
     padding: 20px 40px;
     border-radius: 15px;
-    background: rgba(46, 204, 113, 0.9); /* 초록색 팝업 배경 */
+    background: rgba(46, 204, 113, 0.9);
     color: white;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     z-index: 1000;
@@ -248,7 +256,7 @@ img:hover {
 }
 
 #formMessage.error {
-    background: rgba(231, 76, 60, 0.9); /* 실패 시 빨간 배경 */
+    background: rgba(231, 76, 60, 0.9);
 }
 
 #formMessage.hidden {
@@ -305,7 +313,8 @@ img:hover {
     #detailImages img {
         max-width: 100%;
     }
-    .form-group input {
+    .form-group input,
+    .form-group select {
         max-width: 100%;
     }
     #reserveButton {
