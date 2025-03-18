@@ -9,7 +9,7 @@ collections:
   - name: "products"
     label: "Products"
     files:
-      - file: "static/data/products.json"  # 단일 파일 경로 명시
+      - file: "static/data/products.json"
         label: "Product List"
         name: "products"
         format: "json"
@@ -24,7 +24,6 @@ collections:
               - { label: "Image", name: "image", widget: "image" }
               - label: "Detail Images"
                 name: "detailImages"
-                widget: "file"  # 다중 파일 업로드 위젯
-                multiple: true  # 다중 파일 업로드 활성화
-                media_folder: "static/images/uploads"
-                public_folder: "/images/uploads"
+                widget: "list"  # 다중 이미지 리스트로 변경
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
