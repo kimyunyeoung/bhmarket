@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 연락처 유효성 검사 함수
     function isValidContact(contact) {
-        const regex = /^010-\d{4}-\d{4}$/; // 010-1234-5678 형식
+        const regex = /^010-\d{4}-\d{4}$/;
         return regex.test(contact);
     }
 
@@ -81,29 +81,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors', // CORS 문제 우회 (응답 확인 불가)
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            redirect: 'follow' // 리디렉션 처리
         })
-        .then(() => {
-            // 'no-cors' 모드에서는 응답을 확인할 수 없으므로 성공 가정
-            formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
-            formMessage.classList.remove('hidden');
-            formMessage.style.color = '#2ecc71';
-            reservationForm.reset();
-            reserveButton.disabled = false;
-            reserveButton.textContent = '예약하기';
-            setTimeout(() => formMessage.classList.add('hidden'), 3000);
+        .then(response => response.json()) // JSON 응답 파싱
+        .then(result => {
+            if (result.result === 'success') {
+                formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
+                formMessage.classList.remove('hidden');
+                formMessage.style.color = '#2ecc71';
+                reservationForm.reset();
+            } else {
+                throw new Error(result.message || '서버 오류');
+            }
         })
         .catch(error => {
             console.error('예약 실패:', error);
-            formMessage.textContent = '예약에 실패했습니다. 다시 시도해주세요.';
+            formMessage.textContent = '예약에 실패했습니다: ' + error.message;
             formMessage.classList.remove('hidden');
             formMessage.style.color = '#e74c3c';
+        })
+        .finally(() => {
             reserveButton.disabled = false;
             reserveButton.textContent = '예약하기';
+            setTimeout(() => formMessage.classList.add('hidden'), 3000);
         });
     });
 });
