@@ -136,7 +136,6 @@ img {
     height: auto;
     object-fit: cover;
     margin-bottom: 15px;
-    transition: transform 0.3s;
     cursor: pointer;
 }
 
@@ -170,195 +169,7 @@ img:hover {
     border-radius: 10px;
     margin: 10px 0;
     display: block;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 600px) {
-    header {
-        padding: 15px 20px;
-    }
-    header h1 {
-        font-size: 1.8rem;
-    }
-    #themeToggle {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-    ul {
-        grid-template-columns: 1fr;
-    }
-    li {
-        font-size: 1.6rem;
-    }
-    img {
-        max-width: 100%;
-    }
-    .closed {
-        padding: 20px;
-        font-size: 1.2rem;
-    }
-    .closed strong {
-        font-size: 1.6rem;
-    }
-    .closed p {
-        font-size: 1rem;
-    }
-    #productDetail h2 {
-        font-size: 1.6rem;
-    }
-    #productDetail p {
-        font-size: 1.3rem;
-    }
-    #detailImages img {
-        max-width: 100%;
-    }
-    /* product_list.css (기존 내용 유지, 아래만 추가) */
-.form-group {
-    margin: 15px 0;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    color: var(--text-color);
-}
-
-.form-group input {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-#reserveButton {
-    background: var(--primary-color);
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-#reserveButton:hover {
-    background: var(--secondary-color);
-}
-
-#formMessage {
-    margin-top: 15px;
-    font-size: 1.2rem;
-}
-
-#formMessage.hidden {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    .form-group input {
-        max-width: 100%;
-    }
-    #reserveButton {
-        width: 100%;
-        padding: 10px;
-    }
-    /* product_list.css (기존 내용 유지, 아래만 업데이트/추가) */
-.form-group {
-    margin: 20px 0;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: var(--text-color);
-}
-
-.form-group input {
-    width: 100%;
-    max-width: 350px;
-    padding: 12px;
-    font-size: 1.1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
-
-#reserveButton {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 12px 30px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-#reserveButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-#reserveButton:disabled {
-    background: #b0b0b0;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-#formMessage {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-#formMessage.hidden {
-    display: none;
-}
-
-@media (max-width: 600px) {
-    .form-group input {
-        max-width: 100%;
-    }
-    #reserveButton {
-        width: 100%;
-        padding: 12px;
-    }
-    /* product_list.css (기존 내용 유지, 아래만 업데이트/추가) */
-#detailImages img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 10px;
-    margin: 10px 0;
-    display: block;
-    /* 호버 시 커지는 효과 제거 */
-    transition: none;
+    transition: none; /* 이미지 호버 시 커지는 효과 제거 */
 }
 
 .form-group {
@@ -423,17 +234,72 @@ img:hover {
     font-size: 1.4rem;
     font-weight: 500;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(46, 204, 113, 0.1); /* 성공 시 초록 배경 */
+    color: #2ecc71;
     transition: opacity 0.3s;
+}
+
+#formMessage.error {
+    background: rgba(231, 76, 60, 0.1); /* 실패 시 빨간 배경 */
+    color: #e74c3c;
 }
 
 #formMessage.hidden {
     display: none;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 600px) {
+    header {
+        padding: 15px 20px;
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
+    #themeToggle {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    ul {
+        grid-template-columns: 1fr;
+    }
+    li {
+        font-size: 1.6rem;
+    }
+    img {
+        max-width: 100%;
+    }
+    .closed {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+    .closed strong {
+        font-size: 1.6rem;
+    }
+    .closed p {
+        font-size: 1rem;
+    }
+    #productDetail h2 {
+        font-size: 1.6rem;
+    }
+    #productDetail p {
+        font-size: 1.3rem;
+    }
+    #detailImages img {
+        max-width: 100%;
+    }
     .form-group input {
         max-width: 100%;
     }
