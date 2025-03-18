@@ -276,5 +276,76 @@ img:hover {
         width: 100%;
         padding: 10px;
     }
+    /* product_list.css (기존 내용 유지, 아래만 업데이트/추가) */
+.form-group {
+    margin: 20px 0;
+    text-align: left;
 }
+
+.form-group label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.form-group input {
+    width: 100%;
+    max-width: 350px;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+#reserveButton {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#reserveButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#reserveButton:disabled {
+    background: #b0b0b0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#formMessage {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+#formMessage.hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .form-group input {
+        max-width: 100%;
+    }
+    #reserveButton {
+        width: 100%;
+        padding: 12px;
+    }
 }
