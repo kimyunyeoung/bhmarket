@@ -1,6 +1,6 @@
 /* product_list.css */
 :root {
-    --primary-color: #6c5ce7; /* 메인 색상 */
+    --primary-color: #6c5ce7;
     --secondary-color: #a29bfe;
     --text-color: #2d3436;
     --bg-color: #f0f2f5;
@@ -11,7 +11,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #dfe6e9, #b2bec3); /* 그라디언트 배경 */
+    background: linear-gradient(135deg, #dfe6e9, #b2bec3);
     color: var(--text-color);
     transition: background 0.3s, color 0.3s;
 }
@@ -56,9 +56,40 @@ header h1 {
     background: var(--secondary-color);
 }
 
+#businessStatus {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#businessStatus.hidden {
+    display: none;
+}
+
+.closed {
+    background: #ff7675;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.4rem;
+}
+
+.closed strong {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.closed p {
+    margin: 5px 0;
+    font-size: 1.2rem;
+}
+
 main {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 20px auto;
     padding: 0 20px;
 }
 
@@ -102,28 +133,6 @@ img:hover {
     transform: scale(1.05);
 }
 
-/* 영업 종료 메시지 */
-li.closed {
-    background: #ff7675;
-    color: white;
-    font-size: 1.6rem;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-li.closed strong {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 15px;
-}
-
-li.closed p {
-    margin: 5px 0;
-    font-size: 1.4rem;
-}
-
-/* 모바일 반응형 */
 @media (max-width: 600px) {
     header {
         padding: 15px 20px;
@@ -139,18 +148,18 @@ li.closed p {
         grid-template-columns: 1fr;
     }
     li {
-        font-size: 1.6rem; /* 모바일에서 텍스트 크기 유지 */
+        font-size: 1.6rem;
     }
     img {
         max-width: 100%;
     }
-    li.closed {
-        font-size: 1.4rem;
-    }
-    li.closed strong {
-        font-size: 1.8rem;
-    }
-    li.closed p {
+    .closed {
         font-size: 1.2rem;
+    }
+    .closed strong {
+        font-size: 1.6rem;
+    }
+    .closed p {
+        font-size: 1rem;
     }
 }
