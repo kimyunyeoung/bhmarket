@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 연락처 자동 하이픈 추가
     contactInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, ''); // 숫자만 남김
+        let value = e.target.value.replace(/\D/g, '');
         if (value.length > 3 && value.length <= 7) {
             value = `${value.slice(0, 3)}-${value.slice(3)}`;
         } else if (value.length > 7) {
@@ -93,18 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors', // CORS 우회
+            mode: 'no-cors',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
         .then(() => {
-            // 'no-cors'로 응답 확인 불가, 성공 가정
             formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
             formMessage.classList.remove('hidden');
             formMessage.style.color = '#2ecc71';
             reservationForm.reset();
+
+            // 5초 후 메시지 숨기고 상품 목록 페이지로 이동
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+                window.location.href = 'index.html';
+            }, 5000);
         })
         .catch(error => {
             console.error('예약 실패:', error);
@@ -115,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .finally(() => {
             reserveButton.disabled = false;
             reserveButton.textContent = '예약하기';
-            setTimeout(() => formMessage.classList.add('hidden'), 3000);
         });
     });
 });
