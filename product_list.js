@@ -74,18 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.alt = product.name;
                 img.onerror = () => console.error(`${product.name} 이미지 로드 실패: ${img.src}`);
                 img.onclick = () => {
-                    const popup = window.open('', '_blank', 'width=800,height=600');
-                    popup.document.write('<h1>상세 이미지</h1><style>body { background: #f0f2f5; text-align: center; }</style>');
-                    if (product.detailImages && product.detailImages.length > 0) {
-                        product.detailImages.forEach(detail => {
-                            const detailImg = popup.document.createElement('img');
-                            detailImg.src = encodeURI(`/static${detail.image}`);
-                            detailImg.style.width = '80%';
-                            detailImg.style.margin = '10px auto';
-                            detailImg.style.display = 'block';
-                            popup.document.body.appendChild(detailImg);
-                        });
-                    }
+                    // 상세 이미지 배열을 문자열로 변환
+                    const detailImages = product.detailImages && product.detailImages.length > 0 
+                        ? product.detailImages.map(detail => detail.image).join(',')
+                        : '';
+                    // 새 페이지로 이동
+                    window.location.href = `detail.html?name=${encodeURIComponent(product.name)}&price=${encodeURIComponent(product.price)}&images=${encodeURIComponent(detailImages)}`;
                 };
 
                 listItem.insertBefore(img, listItem.firstChild);
