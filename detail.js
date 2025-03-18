@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         reserveButton.disabled = true;
         reserveButton.textContent = '처리 중...';
 
-        // Google Apps Script URL (배포 후 삽입)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxJ_bPDrnTJbiL89WQfBWlw6nrDD1-8i7s2AG2jxAeNGkqcaFgFvLpRPqxAaGqVvhoC/exec'; // 여기에 실제 URL 입력
+        // Google Apps Script URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz4_xxJfKHyj__omcR17vHCB1VEITuB9a0d-ARa_2kn4hW929uLASAbp-pDDEv-zn1_/exec';
 
         const data = {
             productName: name,
@@ -85,9 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            redirect: 'follow' // 리디렉션 처리
+            redirect: 'follow'
         })
-        .then(response => response.json()) // JSON 응답 파싱
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`서버 오류: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(result => {
             if (result.result === 'success') {
                 formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
@@ -95,12 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 formMessage.style.color = '#2ecc71';
                 reservationForm.reset();
             } else {
-                throw new Error(result.message || '서버 오류');
+                throw new Error(result.message || '서버 응답 오류');
             }
         })
         .catch(error => {
             console.error('예약 실패:', error);
-            formMessage.textContent = '예약에 실패했습니다: ' + error.message;
+            formMessage.textContent = `예약에 실패했습니다: ${error.message}`;
             formMessage.classList.remove('hidden');
             formMessage.style.color = '#e74c3c';
         })
