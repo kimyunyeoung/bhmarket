@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reserveButton.textContent = '처리 중...';
 
         // Google Apps Script URL (배포 후 삽입)
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // 여기에 실제 URL 입력
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxJ_bPDrnTJbiL89WQfBWlw6nrDD1-8i7s2AG2jxAeNGkqcaFgFvLpRPqxAaGqVvhoC/exec'; // 여기에 실제 URL 입력
 
         const data = {
             productName: name,
