@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailImagesEl = document.getElementById('detailImages');
     const reservationForm = document.getElementById('reservationForm');
     const formMessage = document.getElementById('formMessage');
+    const reserveButton = document.getElementById('reserveButton');
 
     // URL 파라미터에서 상품 정보 가져오기
     const urlParams = new URLSearchParams(window.location.search);
@@ -28,16 +29,46 @@ document.addEventListener('DOMContentLoaded', () => {
         detailImagesEl.innerHTML = '<p>상세 이미지가 없습니다.</p>';
     }
 
+    // 연락처 유효성 검사 함수
+    function isValidContact(contact) {
+        const regex = /^010-\d{4}-\d{4}$/; // 010-1234-5678 형식
+        return regex.test(contact);
+    }
+
     // 예약 폼 제출 처리
     reservationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const reserverName = document.getElementById('reserverName').value;
+        const reserverName = document.getElementById('reserverName').value.trim();
         const quantity = document.getElementById('quantity').value;
-        const contact = document.getElementById('contact').value;
+        const contact = document.getElementById('contact').value.trim();
 
-        // Google Apps Script URL (아래에서 설정 필요)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyOtldyavx2RSzIQrHxLTQ0wDs3-MNV7iyvebaaQlqJHaAQqThxIHaTYZRVImECjvE/exec'; // 생성 후 삽입
+        // 유효성 검사
+        if (!reserverName) {
+            formMessage.textContent = '예약자 성함을 입력해주세요.';
+            formMessage.classList.remove('hidden');
+            formMessage.style.color = '#e74c3c';
+            return;
+        }
+        if (!quantity || quantity < 1) {
+            formMessage.textContent = '예약 갯수를 1 이상으로 입력해주세요.';
+            formMessage.classList.remove('hidden');
+            formMessage.style.color = '#e74c3c';
+            return;
+        }
+        if (!contact || !isValidContact(contact)) {
+            formMessage.textContent = '연락처를 010-1234-5678 형식으로 입력해주세요.';
+            formMessage.classList.remove('hidden');
+            formMessage.style.color = '#e74c3c';
+            return;
+        }
+
+        // 로딩 상태 표시
+        reserveButton.disabled = true;
+        reserveButton.textContent = '처리 중...';
+
+        // Google Apps Script URL (배포 후 삽입)
+        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // 여기에 실제 URL 입력
 
         const data = {
             productName: name,
@@ -50,27 +81,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetch(scriptURL, {
             method: 'POST',
+            mode: 'no-cors', // CORS 문제 우회 (응답 확인 불가)
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => {
-            if (response.ok) {
-                formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
-                formMessage.classList.remove('hidden');
-                formMessage.style.color = '#2ecc71';
-                reservationForm.reset();
-                setTimeout(() => formMessage.classList.add('hidden'), 3000);
-            } else {
-                throw new Error('서버 응답 오류');
-            }
+        .then(() => {
+            // 'no-cors' 모드에서는 응답을 확인할 수 없으므로 성공 가정
+            formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
+            formMessage.classList.remove('hidden');
+            formMessage.style.color = '#2ecc71';
+            reservationForm.reset();
+            reserveButton.disabled = false;
+            reserveButton.textContent = '예약하기';
+            setTimeout(() => formMessage.classList.add('hidden'), 3000);
         })
         .catch(error => {
             console.error('예약 실패:', error);
             formMessage.textContent = '예약에 실패했습니다. 다시 시도해주세요.';
             formMessage.classList.remove('hidden');
             formMessage.style.color = '#e74c3c';
+            reserveButton.disabled = false;
+            reserveButton.textContent = '예약하기';
         });
     });
 });
