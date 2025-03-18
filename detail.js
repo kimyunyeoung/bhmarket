@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contact = document.getElementById('contact').value;
 
         // Google Apps Script URL (아래에서 설정 필요)
-        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // 생성 후 삽입
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyOtldyavx2RSzIQrHxLTQ0wDs3-MNV7iyvebaaQlqJHaAQqThxIHaTYZRVImECjvE/exec'; // 생성 후 삽입
 
         const data = {
             productName: name,
