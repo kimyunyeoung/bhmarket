@@ -1,5 +1,228 @@
-/* product_list.css (기존 내용 유지, 아래만 추가) */
-.form-group {
+/* product_list.css */
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --text-color: #2d3436;
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    --primary-color: #a29bfe;
+    --secondary-color: #6c5ce7;
+    --text-color: #dfe6e9;
+    --bg-color: #2d3436;
+    --card-bg: #3b4042;
+    background: linear-gradient(135deg, #2d3436, #636e72);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+header h1 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#themeToggle {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+#themeToggle:hover {
+    background: var(--secondary-color);
+}
+
+#businessStatus {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#businessStatus.hidden {
+    display: none;
+}
+
+.closed {
+    background: linear-gradient(135deg, #ff6b6b, #ff8787);
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.closed strong {
+    font-size: 1.8rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.closed p {
+    margin: 8px 0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+li {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 1.4rem;
+}
+
+li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+img {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+#productDetail {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#productDetail h2 {
+    font-size: 2rem;
+    margin: 0 0 10px;
+    color: var(--primary-color);
+}
+
+#productDetail p {
+    font-size: 1.5rem;
+    margin: 0 0 20px;
+}
+
+#detailImages img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    margin: 10px 0;
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 15px 20px;
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
+    #themeToggle {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    ul {
+        grid-template-columns: 1fr;
+    }
+    li {
+        font-size: 1.6rem;
+    }
+    img {
+        max-width: 100%;
+    }
+    .closed {
+        padding: 20px;
+        font-size: 1.2rem;
+    }
+    .closed strong {
+        font-size: 1.6rem;
+    }
+    .closed p {
+        font-size: 1rem;
+    }
+    #productDetail h2 {
+        font-size: 1.6rem;
+    }
+    #productDetail p {
+        font-size: 1.3rem;
+    }
+    #detailImages img {
+        max-width: 100%;
+    }
+    .form-group {
     margin: 15px 0;
     text-align: left;
 }
@@ -53,4 +276,5 @@
         width: 100%;
         padding: 10px;
     }
+}
 }
