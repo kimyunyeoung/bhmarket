@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formMessage = document.getElementById('formMessage');
     const reserveButton = document.getElementById('reserveButton');
     const contactInput = document.getElementById('contact');
+    const pickupTimeSelect = document.getElementById('pickupTime');
 
     // URL 파라미터에서 상품 정보 가져오기
     const urlParams = new URLSearchParams(window.location.search);
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const reserverName = document.getElementById('reserverName').value.trim();
         const quantity = document.getElementById('quantity').value;
         const contact = contactInput.value.trim();
+        const pickupTime = pickupTimeSelect.value;
 
         // 유효성 검사
         if (!reserverName) {
@@ -74,13 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
             formMessage.classList.add('error');
             return;
         }
+        if (!pickupTime) {
+            formMessage.textContent = '픽업 시간을 선택해주세요.';
+            formMessage.classList.remove('hidden');
+            formMessage.classList.add('error');
+            return;
+        }
 
         // 로딩 상태 표시
         reserveButton.disabled = true;
         reserveButton.textContent = '처리 중...';
 
         // Google Apps Script URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz4_xxJfKHyj__omcR17vHCB1VEITuB9a0d-ARa_2kn4hW929uLASAbp-pDDEv-zn1_/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzlESUgN7GDV9PkwzbXmsmu6LQgp8vYv38Q_cdcyNXZf-x4cRqnitrtduSFLnoaRV7d/exec';
 
         const data = {
             productName: name,
@@ -88,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reserverName: reserverName,
             quantity: quantity,
             contact: contact,
+            pickupTime: pickupTime,
             timestamp: new Date().toLocaleString()
         };
 
@@ -107,15 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 formMessage.style.opacity = '0';
                 setTimeout(() => {
                     window.location.href = 'index.html';
-                }, 300); // 페이드아웃 후 이동
-            }, 5000); // 5초 후 메시지 사라짐
+                }, 300);
+            }, 5000);
         })
         .catch(error => {
             console.error('예약 실패:', error);
             formMessage.textContent = `예약에 실패했습니다: ${error.message}`;
             formMessage.classList.remove('hidden');
             formMessage.classList.add('error');
-            setTimeout(() => formMessage.classList.add('hidden'), 3000); // 실패 메시지도 3초 후 사라짐
+            setTimeout(() => formMessage.classList.add('hidden'), 3000);
         })
         .finally(() => {
             reserveButton.disabled = false;
