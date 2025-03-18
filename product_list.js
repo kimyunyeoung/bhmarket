@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         businessStatus.classList.add('hidden');
     }
 
-    // 상품 목록 로드 (영업 여부와 관계없이 항상 실행)
+    // 상품 목록 로드
     fetch('/static/data/products.json')
         .then(response => {
             if (!response.ok) {
