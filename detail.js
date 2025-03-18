@@ -59,19 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!reserverName) {
             formMessage.textContent = '예약자 성함을 입력해주세요.';
             formMessage.classList.remove('hidden');
-            formMessage.style.color = '#e74c3c';
+            formMessage.classList.add('error');
             return;
         }
         if (!quantity || quantity < 1) {
             formMessage.textContent = '예약 갯수를 1 이상으로 입력해주세요.';
             formMessage.classList.remove('hidden');
-            formMessage.style.color = '#e74c3c';
+            formMessage.classList.add('error');
             return;
         }
         if (!contact || !isValidContact(contact)) {
             formMessage.textContent = '연락처를 010-1234-5678 형식으로 입력해주세요.';
             formMessage.classList.remove('hidden');
-            formMessage.style.color = '#e74c3c';
+            formMessage.classList.add('error');
             return;
         }
 
@@ -101,21 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(() => {
             formMessage.textContent = '예약이 성공적으로 완료되었습니다!';
-            formMessage.classList.remove('hidden');
-            formMessage.style.color = '#2ecc71';
+            formMessage.classList.remove('hidden', 'error');
             reservationForm.reset();
-
-            // 5초 후 메시지 숨기고 상품 목록 페이지로 이동
             setTimeout(() => {
-                formMessage.classList.add('hidden');
-                window.location.href = 'index.html';
-            }, 5000);
+                formMessage.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // 5초 후 상품 목록 페이지로 이동
+                }, 300); // 페이드아웃 후 이동
+            }, 5000); // 5초 후 메시지 사라짐
         })
         .catch(error => {
             console.error('예약 실패:', error);
             formMessage.textContent = `예약에 실패했습니다: ${error.message}`;
             formMessage.classList.remove('hidden');
-            formMessage.style.color = '#e74c3c';
+            formMessage.classList.add('error');
         })
         .finally(() => {
             reserveButton.disabled = false;
