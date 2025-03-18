@@ -11,20 +11,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // URL 파라미터에서 상품 정보 가져오기
     const urlParams = new URLSearchParams(window.location.search);
     const name = decodeURIComponent(urlParams.get('name') || '');
-    const price = urlParams.get('price') || '';
-    const images = decodeURIComponent(urlParams.get('images') || '').split(',');
+    const price = decodeURIComponent(urlParams.get('price') || '');
+    const imagesParam = decodeURIComponent(urlParams.get('images') || '');
+    const images = imagesParam ? imagesParam.split(',') : [];
 
     // 상품 정보 표시
-    productNameEl.textContent = name;
-    productPriceEl.textContent = `가격: ${price}원`;
+    productNameEl.textContent = name || '상품명 없음';
+    productPriceEl.textContent = price ? `가격: ${price}원` : '가격 정보 없음';
 
     // 상세 이미지 표시
     if (images.length > 0 && images[0] !== '') {
-        images.forEach(imageSrc => {
+        images.forEach((imageSrc, index) => {
             const img = document.createElement('img');
-            img.src = encodeURI(`/static${imageSrc}`);
-            img.alt = name;
-            img.onerror = () => console.error(`상세 이미지 로드 실패: ${img.src}`);
+            img.src = encodeURI(`/static${imageSrc.trim()}`); // 공백 제거
+            img.alt = `${name} - 이미지 ${index + 1}`;
+            img.onerror = () => {
+                console.error(`상세 이미지 로드 실패: ${img.src}`);
+                img.src = '/static/images/placeholder.jpg'; // 대체 이미지 (필요 시 추가)
+                img.alt = '이미지 로드 실패';
+            };
             detailImagesEl.appendChild(img);
         });
     } else {
@@ -88,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reserveButton.textContent = '처리 중...';
 
         // Google Apps Script URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzlESUgN7GDV9PkwzbXmsmu6LQgp8vYv38Q_cdcyNXZf-x4cRqnitrtduSFLnoaRV7d/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz4_xxJfKHyj__omcR17vHCB1VEITuB9a0d-ARa_2kn4hW929uLASAbp-pDDEv-zn1_/exec';
 
         const data = {
             productName: name,
