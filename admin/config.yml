@@ -24,14 +24,7 @@ collections:
               - { label: "Image", name: "image", widget: "image" }
               - label: "Detail Images"
                 name: "detailImages"
-                widget: "list"
-                fields:
-                  - { label: "Image", name: "image", widget: "image" }
-                  - { label: "Description", name: "description", widget: "string", required: false }
-          # 새로운 Detail Images 필드 추가 (이름 충돌 방지를 위해 'extraDetailImages'로 명명)
-          - label: "Extra Detail Images"  # 구분을 위해 레이블 변경
-            name: "extraDetailImages"    # 기존 'detailImages'와 다른 이름 사용
-            widget: "list"
-            fields:
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Description", name: "description", widget: "string", required: false }
+                widget: "file"  # 다중 파일 업로드 위젯
+                multiple: true  # 다중 파일 업로드 활성화
+                media_folder: "static/images/uploads"
+                public_folder: "/images/uploads"
