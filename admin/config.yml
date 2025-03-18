@@ -24,6 +24,6 @@ collections:
               - { label: "Image", name: "image", widget: "image" }
               - label: "Detail Images"
                 name: "detailImages"
-                widget: "list"  # 다중 이미지 리스트로 변경
+                widget: "list"
                 fields:
                   - { label: "Image", name: "image", widget: "image" }
