@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isBusinessOpen()) {
         businessStatus.innerHTML = `
             <div class="closed">
-                <strong>영업이 종료되었습니다.</strong>
+                <strong><i class="fas fa-clock"></i> 영업이 종료되었습니다.</strong>
                 <p>영업시간 안내:</p>
                 <p>평일: 11:00 ~ 20:00</p>
                 <p>주말: 11:00 ~ 18:00</p>
