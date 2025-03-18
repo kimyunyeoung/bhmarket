@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const productList = document.getElementById('productList');
     const themeToggle = document.getElementById('themeToggle');
+    const businessStatus = document.getElementById('businessStatus');
 
-    if (!productList) {
-        console.error('productList 요소를 찾을 수 없습니다.');
+    if (!productList || !businessStatus) {
+        console.error('필수 요소를 찾을 수 없습니다.');
         return;
     }
 
@@ -34,18 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
+    // 영업 상태 표시
     if (!isBusinessOpen()) {
-        productList.innerHTML = `
-            <li class="closed">
-                <strong>영업이 종료되었습니다.</strong><br>
+        businessStatus.innerHTML = `
+            <div class="closed">
+                <strong>영업이 종료되었습니다.</strong>
                 <p>영업시간 안내:</p>
                 <p>평일: 11:00 ~ 20:00</p>
                 <p>주말: 11:00 ~ 18:00</p>
-            </li>
+            </div>
         `;
-        return;
+        businessStatus.classList.remove('hidden');
+    } else {
+        businessStatus.classList.add('hidden');
     }
 
+    // 상품 목록 로드 (영업 여부와 관계없이 항상 실행)
     fetch('/static/data/products.json')
         .then(response => {
             if (!response.ok) {
@@ -83,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 };
 
-                listItem.insertBefore(img, listItem.firstChild); // 이미지를 텍스트 위로
+                listItem.insertBefore(img, listItem.firstChild);
                 productList.appendChild(listItem);
             });
         })
