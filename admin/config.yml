@@ -22,6 +22,7 @@ collections:
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Price", name: "price", widget: "number" }
               - { label: "Image", name: "image", widget: "image" }
+              - { label: "Initial Quantity", name: "quantity", widget: "number", default: 60 } # 초기 수량
               - label: "Detail Images"
                 name: "detailImages"
                 widget: "list"
